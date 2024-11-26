@@ -1,4 +1,4 @@
-# Project Name By Team E. Coli
+# Project Name By Team escherichiaColi
 
 # Roster
 
