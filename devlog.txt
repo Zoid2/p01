@@ -6,3 +6,6 @@ Added the rest of the directory structure as per the instructions.
 
 ziyadH -- 2024-11-26 21:41:
 Updated pull request, added to design doc
+
+chloeW -- 2024-11-27 1:56:
+Researched relevant REST APIs, contributed to design doc, created new card for API kb
