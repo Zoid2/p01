@@ -9,6 +9,9 @@ Updated pull request, added to design doc
 
 chloeW -- 2024-11-27 1:56:
 Researched relevant REST APIs, contributed to design doc, created new card for API kb
+<<<<<<< HEAD
 
 jaydenZ -- 2024-11-25 08:49:
 Finallized and finished the design document.
+=======
+>>>>>>> 65939271800cd00365f0942478a21542c752bb4b
