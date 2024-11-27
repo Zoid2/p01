@@ -3,3 +3,12 @@ Added Team Flag and other files to repo for tomorrow's deliverables.
 
 jaydenZ -- 2024-11-25 23:45:
 Added the rest of the directory structure as per the instructions.
+
+ziyadH -- 2024-11-26 21:41:
+Updated pull request, added to design doc
+
+chloeW -- 2024-11-27 1:56:
+Researched relevant REST APIs, contributed to design doc, created new card for API kb
+
+jaydenZ -- 2024-11-25 08:49:
+Finallized and finished the design document.
