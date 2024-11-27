@@ -10,5 +10,5 @@ Updated pull request, added to design doc
 chloeW -- 2024-11-27 01:56:
 Researched relevant REST APIs, contributed to design doc, created new card for API kb
 
-jaydenZ -- 2024-11-25 08:49:
+jaydenZ -- 2024-11-27 08:49:
 Finallized and finished the design document.
