@@ -14,4 +14,6 @@ jaydenZ -- 2024-11-27 08:49:
 Finallized and finished the design document.
 
 chloeW -- 2024-12-03 02:44:
-Addressed comments about request limits by revising design doc to locally cache images from Unsplash API, inspired by another group to add custom error page template to design doc, updated README to include roles, site description, install guide, and launch codes.
+Addressed comments about request limits by revising design doc to locally cache images from Unsplash API, 
+inspired by another group to add custom error page template to design doc, 
+updated README to include roles, site description, install guide, and launch codes.
