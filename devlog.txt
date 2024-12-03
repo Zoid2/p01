@@ -5,10 +5,13 @@ jaydenZ -- 2024-11-25 23:45:
 Added the rest of the directory structure as per the instructions.
 
 ziyadH -- 2024-11-26 21:41:
-Updated pull request, added to design doc
+Updated pull request, added to design doc.
 
 chloeW -- 2024-11-27 01:56:
-Researched relevant REST APIs, contributed to design doc, created new card for API kb
+Researched relevant REST APIs, contributed to design doc, created new card for API kb.
 
 jaydenZ -- 2024-11-27 08:49:
 Finallized and finished the design document.
+
+chloeW -- 2024-12-03 02:44:
+Addressed comments about request limits by revising design doc to locally cache images from Unsplash API, inspired by another group to add custom error page template to design doc, updated README to include roles, site description, install guide, and launch codes.
