@@ -21,3 +21,6 @@ Edited the design document to address any questions posted. Added the design doc
 
 ziyadH, jaydenZ, chloeW -- 2024-12-03 11:59:
 Noted key situation and rate limit for each API in keys readme, stored key for each API requiring one in keys dir.
+
+nafiyuM -- 2024-12-04 11:17:
+Added templates to app directory, filled with empty html template files from design doc.
