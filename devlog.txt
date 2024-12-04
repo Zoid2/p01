@@ -18,3 +18,6 @@ Addressed comments about request limits by revising design doc to locally cache 
 
 jaydenZ -- 2024-12-03 11:09:
 Edited the design document to address any questions posted. Added the design document to the github repository. 
+
+ziyadH, jaydenZ, chloeW -- 2024-12-03 11:59:
+Noted key situation and rate limit for each API in keys readme, stored key for each API requiring one in keys dir
