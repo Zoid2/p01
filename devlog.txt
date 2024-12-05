@@ -34,3 +34,6 @@ Wrote skeleton template html into index.html and signin.html.
 jaydenZ -- 2024-12-05 11:41:
 Added and completed the framework and basics for the flask app.
 
+ziyadH -- 2024-12-05 11:46:
+Started db work and helper functions
+
