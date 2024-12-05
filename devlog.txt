@@ -37,3 +37,5 @@ Added and completed the framework and basics for the flask app.
 ziyadH -- 2024-12-05 11:46:
 Started db work and helper functions
 
+chloeW -- 2024-12-05 17:39:
+Made small fixes to __init__.py, app is now runnable!
