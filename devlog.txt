@@ -25,6 +25,9 @@ Noted key situation and rate limit for each API in keys readme, stored key for e
 nafM -- 2024-12-04 11:17:
 Added templates to app directory, filled with empty html template files from design doc.
 
+chloeW -- 2024-12-05 11:18:
+Added installed packages from virtual enviroment to requirements.txt.
+
 nafM -- 2024-12-05 11:38:
 Wrote skeleton template html into index.html and signin.html.
 
