@@ -1,3 +1,11 @@
+'''
+eColi: Ziyad H, Naf M, Chloe W, Jayden Z
+SoftDev
+P01: Spanish Studying Service
+2024-12-17
+Time Spent:
+'''
+
 import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
@@ -8,17 +16,14 @@ app.secret_key = secret
 
 @app.route("/")
 def home():
-    user = '' 
-    if(session.get('username') != None) {
-        user = session.get('username')
-        }
-    return("index.html", username=user)
+    user = session.get('username', '')
+    return render_template("index.html", username=user)
 
-@app.route("/response" , methods=['POST'])
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-    return render_template('signup.html')
+    return render_template("signup.html")
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if(session.get('username') != None):
         return redirect(url_for("home"))
