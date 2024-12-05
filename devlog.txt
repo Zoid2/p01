@@ -25,6 +25,9 @@ Noted key situation and rate limit for each API in keys readme, stored key for e
 nafM -- 2024-12-04 11:17:
 Added templates to app directory, filled with empty html template files from design doc.
 
-
 nafM -- 2024-12-05 11:38:
 Wrote skeleton template html into index.html and signin.html.
+
+jaydenZ -- 2024-12-05 11:41:
+Added and completed the framework and basics for the flask app.
+
