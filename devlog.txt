@@ -39,3 +39,6 @@ Started db work and helper functions
 
 chloeW -- 2024-12-05 17:39:
 Made small fixes to __init__.py, app is now runnable!
+
+ziyadH -- 2024-12-05 20:01:
+basic database features done, module imported
