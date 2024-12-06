@@ -2,36 +2,47 @@
 <html>
 
 <head>
-
+    <title>Spanish Studying Service | Sign Up</title>
 </head>
 
 <body>
     <header>
         <div><h1>{{ projectName }}</h1></div>
     </header>
-        <div>
-            <form action="/">
-                <input type="submit" value="Home">
-            </form>
-        </div>
-        <div class="signup">
-        <h1>Sign Up</h1>
+    <div>
+        <form action="/">
+            <input type="submit" value="Home">
+        </form>
+    </div>
+    <div class="signup">
+        <h1>Dive Into a World Full of Learning (Sign Up)</h1>
         <form action="/response" method="POST">
-            <input type="text" name="name" placeholder="Name">
-            <input type="text" name="username" placeholder="Make a Username">
-            <input type="text" name="password" placeholder="Make a Password">
-            <input type="submit" value="Sign Up">
-        </form>
-    </div>
-    <div class="login">
-        <h1>Log In</h1>
-        <form action="/login" method="POST">
-            <input type="text" name="usernameL" placeholder="Username"> 
-            <!-- Plan to separate the login and signup pages -->
-            <input type="text" name="passwordL" placeholder="Password">
-            <input type="submit" value="Login">
-        </form>
-    </div>
+            <label for="name">Name</label>
+        </br>
+        <input type="text" name="name" placeholder="your name, please" required>
+    </br>
+</br>
+<label for="username">Username</label>
+</br>
+<input type="text" name="username" placeholder="make the greatest username ever!" required>
+</br>
+</br>
+<label for="password">Password</label></br>
+<input type="text" name="password" placeholder="please follow the password guidelines..." required>
+</br>
+</br>
+<input type="submit" value="Sign Up">
+</form>
+</div>
+<div class="login">
+    <h1>Log In</h1>
+    <form action="/login" method="POST">
+        <input type="text" name="usernameL" placeholder="Username">
+        <!-- Plan to separate the login and signup pages -->
+        <input type="text" name="passwordL" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
+</div>
 
 </body>
 
