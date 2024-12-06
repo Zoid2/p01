@@ -18,5 +18,13 @@ def removeUser(id):
     cursor.execute(f"DELETE FROM users WHERE id='{id}'")
     db.commit()
 
+def validateUser(username, password):
+    dbPassword = cursor.execute(f"SELECT password FROM users WHERE username='{username}'").fetchone()
+    if dbPassword:
+        return dbPassword[0] == password
+    return False
+
+def getName(username):
+    return cursor.execute(f"SELECT name FROM users WHERE username='{username}'").fetchone()[0]
 
 #userTable()

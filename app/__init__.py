@@ -18,7 +18,7 @@ app.secret_key = secret
 @app.route("/")
 def home():
     if session.get("username") != None:
-        return render_template("index.html")
+        return render_template("index.html", name = session["name"])
     return redirect(url_for("signup"))
 
 @app.route("/response" , methods=['POST', 'GET'])
@@ -36,12 +36,24 @@ def register():
 def login():
     if (session.get('username') != None):
         return redirect(url_for("home"))
+    print(request.args)
+    print(request.form)
+    # The 'usernameL' and 'passwordL' will change when html is sorted
+    if request.method == "POST" and db.validateUser(request.form.get("usernameL"), request.form.get("passwordL")):
+        session["username"] = request.form.get("usernameL")
+        print(session["username"])
+        session["name"] = db.getName(session["username"])
+        session["password"] = request.form.get("passwordL")
+        print("Hello")
+        return redirect(url_for("home"))
     return render_template("signin.html")
 
-@app.route("/logout")
+@app.route("/logout", methods=["POST"])
 def logout():
-    session.pop('username', None)
-    return render_template("logout.html")
+    session.pop("username", None)
+    session.pop("password", None)
+    session.pop("name", None)
+    return redirect(url_for("home"))
 
 @app.route("/signup")
 def signup():
