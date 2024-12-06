@@ -1,3 +1,11 @@
+'''
+eColi: Ziyad H, Naf M, Chloe W, Jayden Z
+SoftDev
+P01: Spanish Studying Service
+2024-12-17
+Time Spent:
+'''
+
 import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
@@ -24,7 +32,7 @@ def register():
     session["password"] = password
     return redirect(url_for("home"))
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if (session.get('username') != None):
         return redirect(url_for("home"))
