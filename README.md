@@ -34,8 +34,16 @@ $ pip install -r requirements.txt
 
 # Launch Codes
 
-1. Run the Flask app
+1. Move into this repository
+```
+$ cd p01
+```
+2. Activate the virtual environment
+```
+$ . foo/bin/activate
+```
+3. Run the Flask app
 ```
 $ python3 app/__init__.py
 ```
-2. Navigate to localhost: http://127.0.0.1:5000
+4. Navigate to localhost: http://127.0.0.1:5000
