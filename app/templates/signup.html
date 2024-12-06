@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <header>
+        <div><h1>{{ projectName }}</h1></div>
+    </header>
+        <div>
+            <form action="/">
+                <input type="submit" value="Home">
+            </form>
+        </div>
+        <div class="signup">
+        <h1>Sign Up</h1>
+        <form action="/response" method="POST">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="username" placeholder="Make a Username">
+            <input type="text" name="password" placeholder="Make a Password">
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+    <div class="login">
+        <h1>Log In</h1>
+        <form action="/response" method="POST">
+            <input type="text" name="usernameL" placeholder="Username">
+            <input type="text" name="passwordL" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+</body>
+
+</html>

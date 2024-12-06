@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
+import db_helpers as db
 
 app = Flask(__name__) 
 secret = os.urandom(32)
@@ -8,19 +9,24 @@ app.secret_key = secret
 
 @app.route("/")
 def home():
-    user = '' 
-    if(session.get('username') != None) {
-        user = session.get('username')
-        }
-    return("index.html", username=user)
+    if session.get("username") != None:
+        return render_template("index.html")
+    return redirect(url_for("signup"))
 
-@app.route("/response" , methods=['POST'])
+@app.route("/response" , methods=['POST', 'GET'])
 def register():
-    return render_template('signup.html')
+    name = request.form.get("name")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    db.addUser(name, username, password)
+    session["name"] = name
+    session["username"] = username
+    session["password"] = password
+    return redirect(url_for("home"))
 
 @app.route("/login")
 def login():
-    if(session.get('username') != None):
+    if (session.get('username') != None):
         return redirect(url_for("home"))
     return render_template("signin.html")
 
@@ -28,6 +34,10 @@ def login():
 def logout():
     session.pop('username', None)
     return render_template("logout.html")
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html", projectName = "Name PH")
 
 if __name__ == "__main__":
     app.debug = True
