@@ -42,3 +42,6 @@ Made small fixes to __init__.py, app is now runnable!
 
 ziyadH -- 2024-12-05 20:01:
 basic database features done, module imported
+
+ziyadH -- 2024-12-05 22:22:
+added login capabilities, fixed html page relations and added functionality, added more backend logic and capability
