@@ -18,18 +18,7 @@ secret = os.urandom(32)
 app.secret_key = secret
 
 key_merriam = None
-try:
-    with open("keys/key_merriam_webster.txt", "r") as file:
-        key_merriam = file.read().strip()
-except:
-    print('no merriam key')
-
 key_unsplash = None
-try:
-    with open("keys/key_unsplash.txt", "r") as file:
-        key_unsplash = file.read().strip()
-except:
-    print('no unsplash key')
 
 @app.route("/")
 def home():
@@ -77,8 +66,19 @@ def signup():
 
 @app.route("/lesson")
 def lesson():
+    try:
+        with open("keys/key_merriam_webster.txt", "r") as file:
+            key_merriam = file.read().strip()
+    except:
+        return error("Missing key for Merriam-Webster API")
+    try:
+        with open("keys/key_unsplash.txt", "r") as file:
+            key_unsplash = file.read().strip()
+    except:
+        return error("Missing key for Unsplash API")
     prompt = 'animal'
     prompt_trans = None
+    related = None
     related_trans = None
     image = None
     if key_unsplash:
@@ -87,13 +87,17 @@ def lesson():
             unsplash_data = json.loads(unsplash.read())
             image = unsplash_data['results'][0]['urls']['raw']
         except:
-            print('error with unsplash api')
+            print("Issue with Unsplash API")
+            #return error("Issue with Unsplash API")
+    else:
+        return error("File for Unsplash key empty")
     try:
         datamuse = urllib.request.urlopen('https://api.datamuse.com/words?rel_jjb=' + prompt)
         datamuse_data = json.loads(datamuse.read())
         related = datamuse_data[0]['word']
     except:
-        print('error with datamuse api')
+        print("Issue with Datamuse API")
+        #return error("Issue with Datamuse API")
     if key_merriam:
         try:
             merriam_prompt = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + prompt + '?key=' + key_merriam)
@@ -103,8 +107,15 @@ def lesson():
             merriam_related_data = json.loads(merriam_related.read())
             related_trans = merriam_related_data[0]['shortdef'][0]
         except:
-            print('error with merriam api')
+            print("Issue with Merriam-Webster API")
+            #return error("Issue with Merriam-Webster API")
+    else:
+        return error("File for Merriam-Webster key empty")
     return render_template('lesson.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image)
+
+@app.route("/error")
+def error(message):
+    return render_template("error.html", error = message)
 
 if __name__ == "__main__":
     app.debug = True
