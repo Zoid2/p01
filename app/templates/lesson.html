@@ -12,8 +12,10 @@
 </head>
 <body>
     <!-- Testing APIs -->
-    <p>{{ word }}</p>
-    <p>{{ translation }}</p>
-    <img src="{{ image }}" alt="Photo from Unsplash" style=width:100%>
+    <p>Word: {{ prompt }}</p>
+    <p>How to say &#8220{{ prompt }}&#8221 in Spanish: {{ prompt_trans }}</p>
+    <p>A word you may use to describe &#8220{{ prompt }}&#8221: {{ related }}</p>
+    <p>How to say &#8220{{ related }}&#8221 in Spanish: {{ related_trans }}</p>
+    <img src={{ image }} alt="Photo from Unsplash" style=width:100%>
 </body>
 </html>

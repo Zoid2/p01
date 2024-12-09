@@ -77,27 +77,34 @@ def signup():
 
 @app.route("/lesson")
 def lesson():
-    prompt = 'flower'
-    datamuse = urllib.request.urlopen('https://api.datamuse.com/words?ml=' + prompt)
-    datamuse_data = json.loads(datamuse.read())
-    word = datamuse_data[0]['word']
-    translation = None
-    if key_merriam:
-        try:
-            merriam = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + word + '?key=' + key_merriam)
-            merriam_data = json.loads(merriam.read())
-            translation = merriam_data[0]['shortdef'][0]
-        except:
-            print('error with merriam api')
+    prompt = 'animal'
+    prompt_trans = None
+    related_trans = None
     image = None
     if key_unsplash:
         try:
-            unsplash = urllib.request.urlopen('https://api.unsplash.com/search/photos?page=1&query=' + word + '&client_id=' + key_unsplash)
+            unsplash = urllib.request.urlopen('https://api.unsplash.com/search/photos?page=1&query=' + prompt + '&client_id=' + key_unsplash)
             unsplash_data = json.loads(unsplash.read())
             image = unsplash_data['results'][0]['urls']['raw']
         except:
             print('error with unsplash api')
-    return render_template('lesson.html', word = word, translation = translation, image = image)
+    try:
+        datamuse = urllib.request.urlopen('https://api.datamuse.com/words?rel_jjb=' + prompt)
+        datamuse_data = json.loads(datamuse.read())
+        related = datamuse_data[0]['word']
+    except:
+        print('error with datamuse api')
+    if key_merriam:
+        try:
+            merriam_prompt = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + prompt + '?key=' + key_merriam)
+            merriam_prompt_data = json.loads(merriam_prompt.read())
+            prompt_trans = merriam_prompt_data[0]['shortdef'][0]
+            merriam_related = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + related + '?key=' + key_merriam)
+            merriam_related_data = json.loads(merriam_related.read())
+            related_trans = merriam_related_data[0]['shortdef'][0]
+        except:
+            print('error with merriam api')
+    return render_template('lesson.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image)
 
 if __name__ == "__main__":
     app.debug = True
