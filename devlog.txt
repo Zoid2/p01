@@ -52,5 +52,5 @@ Wrote code to load keys and make API calls, added basic HTML to test.
 nafM -- 2024-12-09 11:17:
 all html files properly formatted, completed error.html (as standalone page), completed logout.html (as standalone page), cleaned up signin.html, signup.html, awaiting cleanup for index.html
 
-chloeW -- 2024-12-09 17:18:
-Continued implementing APIs to create Spanish lessons/flashcards.
+chloeW -- 2024-12-09 18:02:
+Continued implementing APIs to create Spanish lessons/flashcards, improved error handling.
