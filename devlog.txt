@@ -48,3 +48,7 @@ added login capabilities, fixed html page relations and added functionality, add
 
 chloeW -- 2024-12-08 20:02:
 Wrote code to load keys and make API calls, added basic HTML to test.
+
+nafM -- 2024-12-09 11:17:
+all html files properly formatted
+completed error.html (as standalone page)
