@@ -52,3 +52,6 @@ Wrote code to load keys and make API calls, added basic HTML to test.
 nafM -- 2024-12-09 11:17:
 all html files properly formatted
 completed error.html (as standalone page)
+
+nafM -- 2024-12-09 11:30:
+completed logout.html (as standalone page)
