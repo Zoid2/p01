@@ -77,7 +77,8 @@ def signup():
 
 @app.route("/lesson")
 def lesson():
-    datamuse = urllib.request.urlopen('https://api.datamuse.com/words?ml=food')
+    prompt = 'flower'
+    datamuse = urllib.request.urlopen('https://api.datamuse.com/words?ml=' + prompt)
     datamuse_data = json.loads(datamuse.read())
     word = datamuse_data[0]['word']
     translation = None
