@@ -45,3 +45,6 @@ basic database features done, module imported
 
 ziyadH -- 2024-12-05 22:22:
 added login capabilities, fixed html page relations and added functionality, added more backend logic and capability
+
+chloeW -- 2024-12-08 20:02:
+Wrote code to load keys and make API calls, added basic HTML to test.
