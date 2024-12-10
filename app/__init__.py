@@ -12,6 +12,7 @@ import sqlite3
 import db_helpers as db
 import urllib.request
 import json
+import random
 
 app = Flask(__name__) 
 secret = os.urandom(32)
@@ -117,6 +118,29 @@ def lesson():
 def error(message):
     return render_template("error.html", error = message)
 
+@app.route("/study")
+def study():
+    questionsArr = []
+    imagesArr = []
+    wordBank = []
+    questionsTotal = response.form.get("questionsTotal")
+    for i in range(questionsTotal):
+        randomInt = random.randint(1,2)
+        try:
+            if randomInt == 1:
+                unsplash = urllib.request.urlopen('https://api.unsplash.com/search/photos?page=1&query=' + wordBank[i] + '&client_id=' + key_unsplash)
+                unsplash_data = json.loads(unsplash.read())
+                image = unsplash_data['results'][0]['urls']['raw']
+                imagesArr.append(image)
+            else:
+                randomInt2 = random.randint(1,2)
+                if randomInt2 == 1:
+                    questionsArr.append("Translate to Spanish: " + wordBank[i])
+                else:
+                    questionsArr.append("Translate to English: ")
+        except:
+            print('error with unsplash api')
+    
 if __name__ == "__main__":
     app.debug = True
     app.run()
