@@ -54,3 +54,6 @@ all html files properly formatted, completed error.html (as standalone page), co
 
 chloeW -- 2024-12-09 18:02:
 Continued implementing APIs to create Spanish lessons/flashcards, improved error handling.
+
+nafM -- 2024-12-10 11:44:
+css linkage begun, css applied to error.htmol.
