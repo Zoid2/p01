@@ -52,8 +52,14 @@ Wrote code to load keys and make API calls, added basic HTML to test.
 nafM -- 2024-12-09 11:17:
 all html files properly formatted, completed error.html (as standalone page), completed logout.html (as standalone page), cleaned up signin.html, signup.html, awaiting cleanup for index.html
 
+jaydenZ -- 2024-12-09 11:41:
+Worked on logic within the study route in the python file, involving the use of the random module. 
+
 chloeW -- 2024-12-09 18:02:
 Continued implementing APIs to create Spanish lessons/flashcards, improved error handling.
+
+jaydenZ -- 2024-12-10 11:41:
+Finished the study route in the python file.
 
 nafM -- 2024-12-10 11:44:
 css linkage begun, css applied to error.htmol.
