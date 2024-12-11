@@ -21,18 +21,26 @@ def removeUser(id):
     db.commit()
 
 def validateUser(username, password):
-    dbPassword = cursor.execute(f"SELECT password FROM users WHERE username='{username}'").fetchone()
+    dbPassword = getHash(username)
     if dbPassword:
-        return dbPassword[0] == hashPassword(password)
+        return validatePassword(dbPassword, password)
     return False
 
 def getName(username):
     return cursor.execute(f"SELECT name FROM users WHERE username='{username}'").fetchone()[0]
+
+def getHash(username):
+    return cursor.execute(f"SELECT password FROM users WHERE username='{username}'").fetchone()[0]
 
 def hashPassword(password):
     bytes = password.encode("utf-8")
     salt = bcrypt.gensalt()
     hashedPassword = bcrypt.hashpw(bytes, salt)
     return hashedPassword
+
+def validatePassword(hash, password):
+    print("Password: " + password)
+    print("Matches Hash: " + str(bcrypt.checkpw(password.encode("utf-8"), hash)))
+    return bcrypt.checkpw(password.encode("utf-8"), hash)
 
 #userTable()

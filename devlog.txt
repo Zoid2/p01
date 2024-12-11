@@ -63,3 +63,6 @@ Finished the study route in the python file.
 
 nafM -- 2024-12-10 11:44:
 css linkage begun, css applied to error.htmol.
+
+ziyadH -- 2024-12-10 21:15:
+implemented password encryption
