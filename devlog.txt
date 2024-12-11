@@ -69,3 +69,6 @@ implemented password encryption
 
 ziyadH -- 2024-12-10 21:41:
 added gitignore to stop tracking automatically produced pycache files
+
+chloeW -- 2024-12-10 12:08:
+Refined lesson function to account for variation in how data from API is formatted.
