@@ -75,3 +75,5 @@ Refined lesson function to account for variation in how data from API is formatt
 
 nafM -- 2024-12-11 11:28:
 added simple css to error.html
+started on simple css to index.html
+incorporated bootstrap
