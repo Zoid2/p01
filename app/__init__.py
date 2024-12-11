@@ -76,7 +76,7 @@ def lesson():
             key_unsplash = file.read().strip()
     except:
         return error("Missing key for Unsplash API")
-    prompt = 'animal'
+    prompt = "alligator"
     prompt_trans = None
     related = None
     related_trans = None
@@ -102,10 +102,16 @@ def lesson():
         try:
             merriam_prompt = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + prompt + '?key=' + key_merriam)
             merriam_prompt_data = json.loads(merriam_prompt.read())
-            prompt_trans = merriam_prompt_data[0]['shortdef'][0]
+            if ":" in merriam_prompt_data[0]['shortdef'][0]:
+                prompt_trans = merriam_prompt_data[0]['shortdef'][0].split(":")[1]
+            else:
+                prompt_trans = merriam_prompt_data[0]['shortdef'][0]
             merriam_related = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + related + '?key=' + key_merriam)
             merriam_related_data = json.loads(merriam_related.read())
-            related_trans = merriam_related_data[0]['shortdef'][0]
+            if ":" in merriam_related_data[0]['shortdef'][0]:
+                related_trans = merriam_related_data[0]['shortdef'][0].split(":")[1]
+            else:
+                related_trans = merriam_related_data[0]['shortdef'][0]
         except:
             print("Issue with Merriam-Webster API")
             #return error("Issue with Merriam-Webster API")
