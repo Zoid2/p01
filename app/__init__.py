@@ -13,7 +13,7 @@ import json
 from flask import Flask, render_template, request, redirect, url_for, session
 import db_helpers as db
 
-app = Flask(__name__) 
+app = Flask(__name__)
 secret = os.urandom(32)
 app.secret_key = secret
 
@@ -76,7 +76,7 @@ def lesson():
             key_unsplash = file.read().strip()
     except:
         return error("Missing key for Unsplash API")
-    prompt = "alligator"
+    prompt = "car"
     prompt_trans = None
     related = None
     related_trans = None
@@ -145,7 +145,7 @@ def study():
                     questionsArr.append("Translate to English: ")
         except:
             print('error with unsplash api')
-    
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

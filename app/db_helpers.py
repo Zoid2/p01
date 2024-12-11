@@ -11,6 +11,15 @@ cursor = db.cursor()
 def userTable():
     cursor.execute("CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT NOT NULL, username TEXT NOT NULL UNIQUE, password TEXT NOT NULL)")
     db.commit()
+#Create a Lesson Table
+def lessonTable():
+    cursor.execute("CREATE TABLE lessons(id INTEGER PRIMARY KEY, title TEXT NOT NULL, completion INTEGER, flashcards TEXT)")
+    db.commit()
+
+#Create Test Table
+def testTable():
+    cursor.execute("CREATE TABLE tests(id INTEGER PRIMARY KEY, questions TEXT, correctAnsweres INTEGER)")
+    db.commit()
 
 def addUser(name, username, password):
     cursor.execute("INSERT INTO users(name, username, password) VALUES (?, ?, ?)", (name, username, hashPassword(password)))
@@ -32,6 +41,7 @@ def getName(username):
 def getHash(username):
     return cursor.execute(f"SELECT password FROM users WHERE username='{username}'").fetchone()[0]
 
+#error?
 def hashPassword(password):
     bytes = password.encode("utf-8")
     salt = bcrypt.gensalt()
