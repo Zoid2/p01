@@ -1,5 +1,7 @@
-from flask import session
 import sqlite3
+from flask import session
+import bcrypt
+
 
 #Create SQLite Table, creates if not already made
 db = sqlite3.connect("database.db", check_same_thread=False)
@@ -11,7 +13,7 @@ def userTable():
     db.commit()
 
 def addUser(name, username, password):
-    cursor.execute("INSERT INTO users(name, username, password) VALUES (?, ?, ?)", (name, username, password))
+    cursor.execute("INSERT INTO users(name, username, password) VALUES (?, ?, ?)", (name, username, hashPassword(password)))
     db.commit()
 
 def removeUser(id):
@@ -21,10 +23,16 @@ def removeUser(id):
 def validateUser(username, password):
     dbPassword = cursor.execute(f"SELECT password FROM users WHERE username='{username}'").fetchone()
     if dbPassword:
-        return dbPassword[0] == password
+        return dbPassword[0] == hashPassword(password)
     return False
 
 def getName(username):
     return cursor.execute(f"SELECT name FROM users WHERE username='{username}'").fetchone()[0]
+
+def hashPassword(password):
+    bytes = password.encode("utf-8")
+    salt = bcrypt.gensalt()
+    hashedPassword = bcrypt.hashpw(bytes, salt)
+    return hashedPassword
 
 #userTable()

@@ -7,12 +7,11 @@ Time Spent:
 '''
 
 import os
-from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
-import db_helpers as db
 import urllib.request
 import json
-import random
+from flask import Flask, render_template, request, redirect, url_for, session
+import db_helpers as db
 
 app = Flask(__name__) 
 secret = os.urandom(32)
