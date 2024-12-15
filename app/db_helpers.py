@@ -11,15 +11,18 @@ cursor = db.cursor()
 def userTable():
     cursor.execute("CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT NOT NULL, username TEXT NOT NULL UNIQUE, password TEXT NOT NULL)")
     db.commit()
+
 #Create a Lesson Table
 def lessonTable():
-    cursor.execute("CREATE TABLE lessons(id INTEGER PRIMARY KEY, title TEXT NOT NULL, completion INTEGER, flashcards TEXT)")
+    cursor.execute("CREATE TABLE lessons(id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT, completion INTEGER, flashcards TEXT)")
     db.commit()
 
 #Create Test Table
 def testTable():
     cursor.execute("CREATE TABLE tests(id INTEGER PRIMARY KEY, questions TEXT, correctAnsweres INTEGER)")
     db.commit()
+
+# User Helpers
 
 def addUser(name, username, password):
     cursor.execute("INSERT INTO users(name, username, password) VALUES (?, ?, ?)", (name, username, hashPassword(password)))
@@ -53,4 +56,31 @@ def validatePassword(hash, password):
     print("Matches Hash: " + str(bcrypt.checkpw(password.encode("utf-8"), hash)))
     return bcrypt.checkpw(password.encode("utf-8"), hash)
 
+# End of User Helpers
+
+# Lesson Helpers
+
+def addLesson(title, content, flashcards):
+    cursor.execute("INSERT INTO lessons(title, content, flashcards) VALUES (?, ?, ?)", (title, content, flashcards))
+    db.commit()
+
+def getLesson(id):
+    return cursor.execute("SELECT content FROM lessons WHERE id=?", (id,)).fetchone()[0]
+
+def csvText(csv):
+    text = open(csv, "r")
+    return text.read()
+
+def createFlashDict(csv):
+    output = {}
+    flashArray = csvText(csv).splitlines()
+    for i in range(len(flashArray)):
+        card = flashArray[i]
+        output[card[:card.index(",")]] = card[card.index(",") + 1:] # Splices each flashcard into a front and back, and creates a dictionary entry
+    return output
+
+# End of Lesson Helpers
+
 #userTable()
+#lessonTable()
+#testTable()

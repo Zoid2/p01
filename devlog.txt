@@ -77,3 +77,6 @@ nafM -- 2024-12-11 11:28:
 added simple css to error.html
 started on simple css to index.html
 incorporated bootstrap
+
+ziyadH -- 2024-12-15 18:03:
+Created lessons and tests tables, added lessons helper functions and outlined framework, created folder for future flashcard csvs
