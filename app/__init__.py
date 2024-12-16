@@ -142,9 +142,19 @@ def study():
                 if randomInt2 == 1:
                     questionsArr.append("Translate to Spanish: " + wordBank[i])
                 else:
-                    questionsArr.append("Translate to English: ")
+                    try:
+                        merriam_prompt = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + wordBank[i] + '?key=' + key_merriam)
+                        merriam_prompt_data = json.loads(merriam_prompt.read())
+                        if ":" in merriam_prompt_data[0]['shortdef'][0]:
+                            prompt_trans = merriam_prompt_data[0]['shortdef'][0].split(":")[1]
+                        else:
+                            prompt_trans = merriam_prompt_data[0]['shortdef'][0]
+                    except:
+                        print("Issue with Merriam-Webster API")
+                    questionsArr.append("Translate to English: " + prompt_trans)
         except:
             print('error with unsplash api')
+    return render_template("study.html", questionsArr = questionsArr)
 
 if __name__ == "__main__":
     app.debug = True
