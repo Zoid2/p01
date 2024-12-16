@@ -6,10 +6,15 @@
 }
 /* antipasto font */
 @font-face {
-    font-family: 'antipasto';
-    src: url('antipasto.ttf');
+    font-family: 'mario';
+    src: url('mario.ttf');
 }
 
+/* body   {
+  background: url('signup.png');
+  background-repeat: no-repeat;
+  backgound-size: cover;
+} */
 
 h1 {
     text-align: center;
@@ -23,7 +28,7 @@ h1 {
     width: 50%;
     text-align: center;
     margin-top: 1%;
-    font-family: antipasto;
+    font-family: mario;
 
 }
 
@@ -32,14 +37,14 @@ h1 {
     width: 50%;
     text-align: center;
     margin-top: 1%;
-    font-family: antipasto;
+    font-family: mario;
 }
 
 .home {
     margin: auto;
     width: 50%;
     text-align: center;
-    font-family: antipasto;
+    font-family: mario;
 }
 
 .title {
