@@ -14,12 +14,12 @@ def userTable():
 
 #Create a Lesson Table
 def lessonTable():
-    cursor.execute("CREATE TABLE lessons(id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT, completion INTEGER, flashcards TEXT)")
+    cursor.execute("CREATE TABLE lessons(id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT, completion INTEGER, flashcards TEXT)") # flashcards should be csv file location
     db.commit()
 
 #Create Test Table
 def testTable():
-    cursor.execute("CREATE TABLE tests(id INTEGER PRIMARY KEY, questions TEXT, correctAnsweres INTEGER)")
+    cursor.execute("CREATE TABLE tests(id INTEGER PRIMARY KEY, questions TEXT, correctAnswers INTEGER)") # questions should be csv file location
     db.commit()
 
 # User Helpers
@@ -67,11 +67,11 @@ def addLesson(title, content, flashcards):
 def getLesson(id):
     return cursor.execute("SELECT content FROM lessons WHERE id=?", (id,)).fetchone()[0]
 
-def csvText(csv):
+def csvText(csv): # Takes csv file location, returns array of flashcards with each term being a card e.g. [spanish, english]
     text = open(csv, "r")
     return text.read()
 
-def createFlashDict(csv):
+def createDict(csv): # Takes csv file location, returns dictionary with first csv term as the key and the second as the value
     output = {}
     flashArray = csvText(csv).splitlines()
     for i in range(len(flashArray)):
@@ -80,6 +80,13 @@ def createFlashDict(csv):
     return output
 
 # End of Lesson Helpers
+
+# Test Helpers
+
+def createUserAnswerDict():
+    pass
+
+# End of Helpers
 
 #userTable()
 #lessonTable()
