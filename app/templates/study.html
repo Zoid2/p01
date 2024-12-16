@@ -10,4 +10,17 @@
     <head>
         <title>Study | Spanish Studying Service</title>
     </head>
+
+    <body>
+		<h1>Spanish Test</h1>
+		<form action="/submit_test" method="POST">
+			{% for question in questionsArr %}
+			<div>
+				<label for="question_{{ loop.index }}">{{ question }}</label><br>
+				<input type="text" id="question_{{ loop.index }}" name="answer_{{ loop.index }}" required>
+			</div>
+			{% endfor %}
+			<button type="submit">Submit Test</button>
+      	</form>
+    </body>
 </html>

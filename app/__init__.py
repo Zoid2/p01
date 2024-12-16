@@ -7,7 +7,7 @@ Time Spent:
 '''
 
 import os
-import sqlite3
+import random
 import urllib.request
 import json
 from flask import Flask, render_template, request, redirect, url_for, session
@@ -64,8 +64,8 @@ def logout():
 def signup():
     return render_template("signup.html", projectName = "Name PH")
 
-@app.route("/lesson")
-def lesson():
+@app.route("/lesson//<int:page_id>")
+def lesson(page_id):
     try:
         with open("keys/key_merriam_webster.txt", "r") as file:
             key_merriam = file.read().strip()
@@ -117,7 +117,14 @@ def lesson():
             #return error("Issue with Merriam-Webster API")
     else:
         return error("File for Merriam-Webster key empty")
-    return render_template('lesson.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image)
+    
+    # Flashcards
+
+    clicked_card = None
+    if request.method == "POST":
+        clicked_card = request.form.get("card_key")
+
+    return render_template('lesson.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image, lessonFlashCards = flashCards(page_id), clicked_card=clicked_card)
 
 @app.route("/error")
 def error(message):
@@ -128,7 +135,7 @@ def study():
     questionsArr = []
     imagesArr = []
     wordBank = []
-    questionsTotal = response.form.get("questionsTotal")
+    questionsTotal = request.form.get("questionsTotal")
     for i in range(questionsTotal):
         randomInt = random.randint(1,2)
         try:
@@ -155,6 +162,15 @@ def study():
         except:
             print('error with unsplash api')
     return render_template("study.html", questionsArr = questionsArr)
+
+def flashCards(lessonNumber):
+    flashCardArray = db.createDict("app/flashcards/lesson_" + lessonNumber + ".csv")
+    return flashCardArray
+
+@app.route("/submit_test", methods=["POST"])
+def submit_test():
+    answers = {key: value for key, value in request.form.items()}
+    return answers
 
 if __name__ == "__main__":
     app.debug = True

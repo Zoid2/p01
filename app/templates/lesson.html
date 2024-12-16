@@ -7,15 +7,40 @@
   Time Spent:
 -->
 <html>
+
 <head>
     <title>Lesson | Spanish Studying Service</title>
 </head>
-<body>
-    <!-- Testing APIs -->
-    <p>Word: {{ prompt }}</p>
-    <p>How to say &#8220{{ prompt }}&#8221 in Spanish: {{ prompt_trans }}</p>
-    <p>A word you may use to describe &#8220{{ prompt }}&#8221: {{ related }}</p>
-    <p>How to say &#8220{{ related }}&#8221 in Spanish: {{ related_trans }}</p>
-    <img src={{ image }} alt="Photo from Unsplash" style=width:100%>
+
+<body> 
+
+	<!-- Testing APIs -->
+	<p>Word: {{ prompt }}</p>
+	<p>How to say &#8220{{ prompt }}&#8221 in Spanish: {{ prompt_trans }}</p>
+	<p>A word you may use to describe &#8220{{ prompt }}&#8221: {{ related }}</p>
+	<p>How to say &#8220{{ related }}&#8221 in Spanish: {{ related_trans }}</p>
+	<img src={{ image }} alt="Photo from Unsplash" style="width:100%">
+	
+	{% for key, value in lessonFlashCards.items() %}
+		<div>
+			{% if clicked_card == key %}
+			<h1>{{ value }}</h1> 
+			{% else %}
+			<h1>{{ key }}</h1> 
+			<form method="POST">
+				<input type="hidden" name="card_key" value="{{ key }}">
+				<button type="submit">Flip Card</button>
+			</form>
+			{% endif %}
+		</div>
+	{% endfor %}
+
 </body>
+
 </html>
+
+
+
+
+
+
