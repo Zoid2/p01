@@ -8,20 +8,18 @@
 -->
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Sign Up | Spanish Studying Service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/signup.css">
 </head>
 
 <body>
     <header>
-        <div><h1>{{ projectName }}</h1></div>
+        <div class="title"><h1>{{ projectName }}</h1></div>
     </header>
-    <div>
-        <form action="/">
-            <input type="submit" value="Home">
-        </form>
-    </div>
-    <div class="signup">
         <h1>Dive Into a World Full of Learning (Sign Up)</h1>
+        <div class="signup">
         <form action="/response" method="POST">
             <label for="name">Name</label>
         </br>
@@ -37,19 +35,24 @@
 <input type="password" name="password" placeholder="please follow the password guidelines..." required>
 </br>
 </br>
-<input type="submit" value="Sign Up">
+<button type="button" class="btn btn-outline-info">Sign Up</button>
 </form>
 </div>
-<div class="login">
     <h1>Log In</h1>
+    <div class="login">
     <form action="/login" method="POST">
-        <input type="text" name="usernameL" placeholder="Username">
+        <input type="text" name="usernameL" placeholder="Username"></br></br>
         <!-- Plan to separate the login and signup pages -->
-        <input type="password" name="passwordL" placeholder="Password">
-        <input type="submit" value="Login">
+        <input type="password" name="passwordL" placeholder="Password"></br></br>
+        <button type="button" class="btn btn-outline-info">Log In</button>
     </form>
 </div>
-
+</br>
+<div class="home">
+    <form action="/">
+        <button type="button" class="btn btn-outline-primary">Home</button>
+    </form>
+</div>
 </body>
 
 </html>

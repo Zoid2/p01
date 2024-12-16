@@ -1,0 +1,54 @@
+/* fonts */
+/* poppins font */
+@font-face {
+    font-family: 'poppins';
+    src: url('poppins.ttf');
+}
+/* antipasto font */
+@font-face {
+    font-family: 'antipasto';
+    src: url('antipasto.ttf');
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-family: poppins;
+    font-size: 30px;
+}
+
+.signup {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 1%;
+    font-family: antipasto;
+
+}
+
+.login {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 1%;
+    font-family: antipasto;
+}
+
+.home {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    font-family: antipasto;
+}
+
+.title {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    font-family: poppins;
+    font-size: 50px;
+}
+
+/* get the buttons to the middle */
+/* while i'm @ it i should also add a "return home" button using bootstrap in error.html as well */
