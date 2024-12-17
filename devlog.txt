@@ -74,12 +74,13 @@ chloeW -- 2024-12-10 12:08:
 Refined lesson function to account for variation in how data from API is formatted.
 
 nafM -- 2024-12-11 11:28:
-added simple css to error.html
-started on simple css to index.html
-incorporated bootstrap
+added simple css to error.html, started on simple css to index.html, incorporated bootstrap
 
 ziyadH -- 2024-12-15 18:03:
 Created lessons and tests tables, added lessons helper functions and outlined framework, created folder for future flashcard csvs
 
 nafM -- 2024-12-17 00:13:
 finished all css for all sites.
+
+chloeW -- 2024-12-17 6:29:
+Created search feature out of lesson function, fixed bugs in flashcards, edited HTML/CSS as needed.
