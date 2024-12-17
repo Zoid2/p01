@@ -64,7 +64,7 @@ def logout():
 def signup():
     return render_template("signup.html", projectName = "Name PH")
 
-@app.route("/lesson//<int:page_id>")
+@app.route("/lesson/<int:page_id>")
 def lesson(page_id):
     try:
         with open("keys/key_merriam_webster.txt", "r") as file:
@@ -130,12 +130,25 @@ def lesson(page_id):
 def error(message):
     return render_template("error.html", error = message)
 
-@app.route("/study")
-def study():
+@app.route("/study/<int:page_id>", methods=["GET", "POST"])
+def study(page_id):
+    defaultValue = 5
     questionsArr = []
     imagesArr = []
     wordBank = []
-    questionsTotal = request.form.get("questionsTotal")
+    wordBankDict = db.createDict("./flashcards/lesson_" + str(page_id) + ".csv")
+    for i in range(len(wordBankDict.values())):
+        randomInt3 = random.randint(0, len(wordBankDict.values()) - 1)
+        wordBank.append(list(wordBankDict.values())[randomInt3])
+        print(wordBank[i])
+        wordBankDict.pop(list(wordBankDict.keys())[randomInt3])
+
+    if request.method == "POST":
+        questions = request.form.get("num_questions")
+        questionsTotal = int(questions)
+    else:
+        questionsTotal = defaultValue
+
     for i in range(questionsTotal):
         randomInt = random.randint(1,2)
         try:
@@ -164,13 +177,14 @@ def study():
     return render_template("study.html", questionsArr = questionsArr)
 
 def flashCards(lessonNumber):
-    flashCardArray = db.createDict("app/flashcards/lesson_" + lessonNumber + ".csv")
+    flashCardArray = db.createDict("./flashcards/lesson_" + str(lessonNumber) + ".csv")
     return flashCardArray
 
 @app.route("/submit_test", methods=["POST"])
 def submit_test():
     answers = {key: value for key, value in request.form.items()}
-    return answers
+    # int correct answers, dict answers ^^, id test_id
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.debug = True
