@@ -80,3 +80,6 @@ incorporated bootstrap
 
 ziyadH -- 2024-12-15 18:03:
 Created lessons and tests tables, added lessons helper functions and outlined framework, created folder for future flashcard csvs
+
+nafM -- 2024-12-17 00:13:
+finished all css for all sites.
