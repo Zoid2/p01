@@ -24,8 +24,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('search') }}">Search</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('lesson') }}">Lessons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('lesson') }}">Lesson</a></li>
+<!--
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('study') }}">Study</a></li>
+--!>
                     {% if session.get('name') %}
                     <li class="nav-item">
                         <form method="POST" action="{{ url_for('logout') }}">

@@ -19,23 +19,6 @@ app.secret_key = secret
 
 key_merriam = None
 key_unsplash = None
-
-@app.before_request
-def create_lessons():
-    lessons = [
-        {
-            "title": "Lesson 1: Animals",
-            "content": "Learn how to identify different animals in Spanish!",
-            "flashcards": "flashcards/lesson_1.csv"  
-        },
-        {
-            "title": "Lesson 2: Food",
-            "content": "Learn how to order your favorite dishes in Spanish!",
-            "flashcards": "flashcards/lesson_2.csv"
-        }
-    ]
-    for lesson in lessons:
-        db.addLesson(lesson["title"], lesson["content"], lesson["flashcards"])
     
 @app.route("/")
 def home():
@@ -92,7 +75,7 @@ def login():
             print(session["username"])
             session["name"] = db.getName(session["username"])
             session["password"] = request.form.get("passwordL")
-            print("Hello")
+            return render_template("index.html")
     except:
         return render_template("error.html", error="Invalid Credentials")
     return render_template("login.html")
@@ -134,7 +117,7 @@ def search():
             key_unsplash = file.read().strip()
     except:
         return error("Missing key for Unsplash API")
-    prompt = request.args.get("word", "alligator")
+    prompt = request.args.get("word", "example")
     prompt_trans = None
     related = None
     related_trans = None
@@ -177,39 +160,19 @@ def search():
         return error("File for Merriam-Webster key empty")
     return render_template('search.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image)
 
-@app.route("/lesson", methods=['GET'])
-@app.route("/lesson/<int:page_id>", methods=['GET', 'POST'])
-def lesson(page_id=None):
-    if page_id is None:
-        available_lessons = db.getAllLessons()  
-        return render_template('all_lessons.html', lessons=available_lessons)
-    else:
-        clicked_card = None
-    title = None
-    content = None
-    flashcards = None
+@app.route("/lesson", methods=["GET", "POST"])
+def lesson():
+    clicked_card = None
     if request.method == "POST":
-            clicked_card = request.form.get("card_key")
-    try:
-        title = db.getLessonTitle(page_id)
-        content = db.getLessonContent(page_id)
-        flashcards = db.getLessonFlashcards(page_id)
-        flashcardArray = db.createDict(flashcards)
-        return render_template('lesson.html', title = title, content = content, lessonFlashCards=flashcardArray, clicked_card=clicked_card)
-    except:
-        return render_template('error.html', error="Lesson not available")
+        clicked_card = request.form.get("card_key")
+    return render_template('lesson.html', lessonFlashCards = flashCards(1), clicked_card=clicked_card)
 
 @app.route("/error")
 def error(message):
     return render_template("error.html", error = message)
 
 @app.route("/study", methods=["GET", "POST"])
-@app.route("/study/<int:page_id>", methods=["GET", "POST"])
 def study(page_id=None):
-    if page_id is None:
-        available_lessons = get_all_lessons()  
-        return render_template('all_lessons.html', lessons=available_lessons)
-    else:
         try:
             with open("keys/key_merriam_webster.txt", "r") as file:
                 key_merriam = file.read().strip()
@@ -226,7 +189,7 @@ def study(page_id=None):
         correctAnswers = []
         imagesArr = {}
         wordBank = []
-        wordBankDict = db.createDict("./flashcards/lesson_" + str(page_id) + ".csv")
+        wordBankDict = db.createDict("./flashcards/lesson_" + "1" + ".csv")
 
         for i in range(len(wordBankDict.values())):
             randomInt3 = random.randint(0, len(wordBankDict.values()) - 1)
