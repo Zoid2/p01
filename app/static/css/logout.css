@@ -1,0 +1,37 @@
+/* fonts */
+/* poppins font */
+@font-face {
+    font-family: 'poppins';
+    src: url('poppins.ttf');
+}
+/* antipasto font */
+@font-face {
+    font-family: 'antipasto';
+    src: url('antipasto.ttf');
+}
+
+h1 {
+  text-align: center;
+  margin-top: 75px;
+  font-family: poppins;
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+}
+
+p {
+  text-align: center;
+  margin-top: 75px;
+  font-family: antipasto;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+
+a {
+
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #252525
+}

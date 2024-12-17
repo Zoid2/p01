@@ -1,0 +1,46 @@
+/* fonts */
+/* poppins font */
+@font-face {
+    font-family: 'poppins';
+    src: url('poppins.ttf');
+}
+/* antipasto font */
+@font-face {
+    font-family: 'antipasto';
+    src: url('antipasto.ttf');
+}
+
+label {
+  text-align: center;
+  font-family: antipasto;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+
+h1 {
+  text-align: center;
+  font-family: poppins;
+  color: white;
+  margin-top: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-family: poppins;
+  color: white;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.lesson {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-family: antipasto;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #252525
+}

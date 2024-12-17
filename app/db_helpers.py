@@ -71,8 +71,14 @@ def addLesson(title, content, flashcards):
     cursor.execute("INSERT INTO lessons(title, content, flashcards) VALUES (?, ?, ?)", (title, content, flashcards))
     db.commit()
 
-def getLesson(id):
+def getLessonTitle(id):
+    return cursor.execute("SELECT title FROM lessons WHERE id=?", (id,)).fetchone()[0]
+
+def getLessonContent(id):
     return cursor.execute("SELECT content FROM lessons WHERE id=?", (id,)).fetchone()[0]
+
+def getLessonFlashcards(id):
+    return cursor.execute("SELECT flashcards FROM lessons WHERE id=?", (id,)).fetchone()[0]
 
 def csvText(csv): # Takes csv file location, returns array of flashcards with each term being a card e.g. [spanish, english]
     text = open(csv, "r")

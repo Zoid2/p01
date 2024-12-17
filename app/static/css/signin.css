@@ -1,0 +1,48 @@
+/* fonts */
+/* poppins font */
+@font-face {
+    font-family: 'poppins';
+    src: url('poppins.ttf');
+}
+/* antipasto font */
+@font-face {
+    font-family: 'antipasto';
+    src: url('antipasto.ttf');
+}
+
+.title {
+  text-align: center;
+  margin-top: 75px;
+  font-family: poppins;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.loginTitle {
+  text-align: center;
+  margin-top: 75px;
+  font-family: poppins;
+  font-size: 60px;
+  color: rgb(255, 255, 255);
+}
+
+.login {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 30px;
+}
+
+input, textarea {
+
+  background-color : rgba(255, 0, 0, 0);
+  box-shadow: 0 0 5px rgb(255, 255, 255);
+  caret-color: white;
+  color: white; 
+
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #252525
+}

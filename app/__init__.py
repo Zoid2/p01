@@ -20,7 +20,24 @@ app.secret_key = secret
 key_merriam = None
 key_unsplash = None
 
-@app.route("/", methods=['POST', 'GET'])
+@app.before_first_request
+def create_lessons():
+    lessons = [
+        {
+            "title": "Lesson 1: Animals",
+            "content": "Learn how to identify different animals in Spanish!",
+            "flashcards": "flashcards/lesson_1.csv"  
+        },
+        {
+            "title": "Lesson 2: Food",
+            "content": "Learn how to order your favorite dishes in Spanish!",
+            "flashcards": "flashcards/lesson_2.csv"
+        }
+    ]
+    for lesson in lessons:
+        db.addLesson(lesson["title"], lesson["content"], lesson["flashcards"])
+    
+@app.route("/")
 def home():
     if session.get("username") != None:
         allTables = db.displayAllTables()
@@ -161,10 +178,19 @@ def lesson(page_id=None):
         return render_template('all_lessons.html', lessons=available_lessons)
     else:
         clicked_card = None
-        if request.method == "POST":
+    title = None
+    content = None
+    flashcards = None
+    if request.method == "POST":
             clicked_card = request.form.get("card_key")
-
-        return render_template('lesson.html', lessonFlashCards=flashCards(page_id), clicked_card=clicked_card)
+    try:
+        title = db.getLessonTitle(page_id+1)
+        content = db.getLessonContent(page_id+1)
+        flashcards = db.getLessonFlashcards(page_id+1)
+        flashcardArray = db.createDict(flashcards)
+        return render_template('lesson.html', title = title, content = content, lessonFlashCards=flashcardArray, clicked_card=clicked_card)
+    except:
+        return render_template('error.html', error="Lesson not available")
 
 @app.route("/error")
 def error(message):
@@ -279,6 +305,14 @@ def submit_test():
         db.addQuestion(testName, questions[i], answers[i], correctAnswers[i])
 
     return redirect(url_for("home"))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', error = "Page not found"), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error.html', error = "Internal server error"), 500
 
 if __name__ == "__main__":
     app.debug = True
