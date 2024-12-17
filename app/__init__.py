@@ -23,7 +23,31 @@ key_unsplash = None
 @app.route("/")
 def home():
     if session.get("username") != None:
-        return render_template("index.html", name = session["name"])
+        userTables = db.displayAllTables()
+        testTables = []
+        questions = [[]]
+        userAnswers = [[]]
+        correctAnswers = [[]]
+        correctAnswersAmount = []
+
+        for table in userTables:
+            if table.startswith("test"):
+                testTables.append(table[4:])
+                questions.append(db.getQuestions(table))
+                userAnswers.append(db.getAnswers(table))
+                correctAnswers.append(db.getCorrectAnswers(table))
+
+        for i in range(len(testTables)):
+            correct = 0
+            for j in range(len(userAnswers)):
+                for k in range(len(userAnswers[i])):
+                    if userAnswers[i][j][k].strip().lower() == correctAnswers[i][j][k].strip().lower():
+                        correct+=1
+            correctAnswersAmount.append(correct)
+            
+        return render_template("index.html", name = session["name"], questions = questions, 
+                               userAnswers = userAnswers, correctAnswers = correctAnswers, 
+                               testNumber = testTables, correctAnswersAmount = correctAnswersAmount)
     return redirect(url_for("signup"))
 
 @app.route("/response" , methods=['POST', 'GET'])
@@ -135,9 +159,10 @@ def study(page_id):
     defaultValue = 5
     questionsArr = []
     correctAnswers = []
-    imagesArr = []
+    imagesArr = {}
     wordBank = []
     wordBankDict = db.createDict("./flashcards/lesson_" + str(page_id) + ".csv")
+
     for i in range(len(wordBankDict.values())):
         randomInt3 = random.randint(0, len(wordBankDict.values()) - 1)
         wordBank.append(list(wordBankDict.values())[randomInt3])
@@ -157,7 +182,8 @@ def study(page_id):
                 unsplash = urllib.request.urlopen('https://api.unsplash.com/search/photos?page=1&query=' + wordBank[i] + '&client_id=' + key_unsplash)
                 unsplash_data = json.loads(unsplash.read())
                 image = unsplash_data['results'][0]['urls']['raw']
-                imagesArr.append(image)
+                questionsArr.append("Identify the object: " + wordBank[i])
+                imagesArr.update({len(questionsArr):image})
                 correctAnswers.append(wordBank[i])
             else:
                 randomInt2 = random.randint(1,2)
@@ -187,7 +213,9 @@ def study(page_id):
                     correctAnswers.append(wordBank[i])
         except:
             print('error with unsplash api')
-    return render_template("study.html", questionsArr = questionsArr, correctAnswers = correctAnswers, testID = page_id)
+    print(len(correctAnswers))
+    print(len(questionsArr))
+    return render_template("study.html", questionsArr = questionsArr, correctAnswers = correctAnswers, testID = page_id, imagesArr = imagesArr)
 
 def flashCards(lessonNumber):
     flashCardArray = db.createDict("./flashcards/lesson_" + str(lessonNumber) + ".csv")
@@ -198,21 +226,19 @@ def submit_test():
     answers = []
     questions = []
     correctAnswers = []
-    testID = []
+    testID = None
     
     for key, value in request.form.items():
         if key.startswith('answer_'):
-            question_index = key.split('_')[1]
-            answers[question_index] = value
+            answers.append(value)
         elif key.startswith('question_'):
-            question_index = key.split('_')[1]
-            questions[question_index] = value
+            questions.append(value)
+        elif key.startswith('correct_'):
+            correctAnswers.append(value)
         else:
-            question_index = key.split('_')[1]
-            testID.append(int(key.split('_')[2]))
-            correctAnswers[question_index] = value
+            testID = int(key.split('_')[1])
     
-    testName = "test" + testID[0]
+    testName = "test" + str(testID)
     
     db.testTable(testName)
     

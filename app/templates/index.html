@@ -13,18 +13,45 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/index.css">
 </head>
+
 <body>
-
     <h1>Spanish Learning Service</h1>
-
     <p>Welcome, {{ name }}, to Spanish Studying Service! This is a website that aims to hone in your spanish skills as a new or returning learner. Learn from lessons, take randomized tests, and soar to new levels of learning a different language!</p>
-
-</br>
-    <a href="{{ url_for('login') }}" class="btn btn-outline-info">Login</a>
-</br>
-    <a href="{{ url_for('signup') }}">Register</a>
-<br>
+    <br><a href="{{ url_for('login') }}" class="btn btn-outline-info">Login</a>
+    <br><a href="{{ url_for('signup') }}">Register</a><br>
     <form action="/logout" method="POST">
         <input type="submit" name="Logout" value="Logout">
     </form>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Spanish Test</h1>
+    
+        <div class="row">
+            {% for i, test in testNumber %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        Test #{{ test }} - Correct Answers: {{ correctAnswersAmount[i] }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Click to View Details</h5>
+                        <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#test{{ test }}">View Questions</button>
+    
+                        <div id="test{{ test }}" class="collapse mt-3">
+                            <ul class="list-group">
+                                {% for questionIndex, question in enumerate(questions[i]) %}
+                                <li class="list-group-item">
+                                    <p>Question {{ questionIndex + 1 }}:</p> {{ question }}<br>
+                                    <p>Your Answer:</p> {{ userAnswers[i][questionIndex] }}<br>
+                                    <p>Correct Answer:</p> {{ correctAnswers[i][questionIndex] }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>

@@ -115,6 +115,10 @@ def getCorrectAnswers(table):
         output.append(correctAnswer)
     return output
 
+def displayAllTables():
+    tables = cursor.fetchall()
+    tableNames = [table[0] for table in tables]
+    return tableNames
 
 # End of Helpers
 
