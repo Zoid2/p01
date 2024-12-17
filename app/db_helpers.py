@@ -1,3 +1,11 @@
+'''
+eColi: Ziyad H, Naf M, Chloe W, Jayden Z
+SoftDev
+P01: Spanish Studying Service
+2024-12-17
+Time Spent: 10 hours
+'''
+
 import sqlite3
 from flask import session
 import bcrypt
@@ -128,8 +136,13 @@ def displayAllTables():
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = cursor.fetchall()
     tableNames = [table[0] for table in tables]  # Extract table names from result
-    print(tableNames)
     return tableNames
+
+def getAllLessons():
+    cursor.execute("SELECT id, title, content, flashcards FROM lessons;")
+    lessons = cursor.fetchall()
+    return lessons  # Returns a list of tuples
+
 
 # End of Helpers
 

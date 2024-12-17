@@ -3,7 +3,7 @@ eColi: Ziyad H, Naf M, Chloe W, Jayden Z
 SoftDev
 P01: Spanish Studying Service
 2024-12-17
-Time Spent:
+Time Spent: 10 hours
 '''
 
 import os
@@ -20,7 +20,7 @@ app.secret_key = secret
 key_merriam = None
 key_unsplash = None
 
-@app.before_first_request
+@app.before_request
 def create_lessons():
     lessons = [
         {
@@ -56,6 +56,13 @@ def home():
                 userAnswers.append(db.getAnswers(table))
                 correctAnswers.append(db.getCorrectAnswers(table))
 
+        questionsDict = []
+        for i in range(len(questions)):
+            for j in range(len(questions[i])):
+                questionsDict.append({j:questions[i][j]})
+
+        print(questionsDict)
+
         for i in range(len(testTables)):  # Loop through the tests
             correct = 0
             for j in range(len(userAnswers[i])):  # Loop through the questions for the current test
@@ -67,7 +74,7 @@ def home():
         print(userAnswers)
         print(questions)
             
-        return render_template("index.html", name = session["name"], questions = questions, 
+        return render_template("index.html", name = session["name"], questionDict = questionsDict, 
                                userAnswers = userAnswers, correctAnswers = correctAnswers, 
                                testNumber = testTables, correctAnswersAmount = correctAnswersAmount)
     return redirect(url_for("signup"))

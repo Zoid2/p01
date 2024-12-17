@@ -51,7 +51,7 @@
             <!-- Image -->
             <div class="col-md-6">
                 <div class="content-box img-box">
-                    <img src="./images/monolingo.jpeg" alt="Sample Image" class="img-fluid">
+                    <img src="{{ url_for('static', filename='images/monolingo.jpeg') }}" alt="Sample Image" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -93,17 +93,18 @@
     
                         <div id="test{{ test }}" class="collapse mt-3">
                             <ul class="list-group">
-                                {% for question in questions %}
-                                    {% for q in question %}
+                                {% for question in questionDict %}
+                                    {% for questionIndex, q in question.items() %}
                                     <li class="list-group-item">
-                                        <p>Question:</p> {{ q }}<br>
-                                        <p>Your Answer:</p> {{ userAnswers[loop.index] }}<br>
-                                        <p>Correct Answer:</p> {{ correctAnswers[loop.index] }}
+                                        <p>Question {{ questionIndex + 1 }}: {{ q }}
+                                        <p>Your Answer: {{ userAnswers[loop.index0][questionIndex] }}
+                                        <p>Correct Answer: {{ correctAnswers[loop.index0][questionIndex] }}
                                     </li>
                                     {% endfor %}
                                 {% endfor %}
                             </ul>
                         </div>
+
 
                     </div>
                 </div>
