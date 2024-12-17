@@ -1,0 +1,39 @@
+/* fonts */
+/* poppins font */
+@font-face {
+    font-family: 'poppins';
+    src: url('poppins.ttf');
+}
+/* antipasto font */
+@font-face {
+    font-family: 'antipasto';
+    src: url('antipasto.ttf');
+}
+
+h1 {
+  text-align: center;
+  margin-top: 75px;
+  font-family: poppins;
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+}
+
+label {
+  text-align: center;
+  margin-top: 75px;
+  font-family: poppins;
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+}
+
+.container mt-5 {
+  font-family: antipasto;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(studybg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
