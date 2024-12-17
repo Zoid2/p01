@@ -17,7 +17,8 @@
 </head>
 
 <body>
-	<h1>Lesson</h1>
+	<h1>{title}</h1>
+	{content}
 	{% for key, value in lessonFlashCards.items() %}
 		{% if loop.index != 1 %}
 			<div class="lesson">

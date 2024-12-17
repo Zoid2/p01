@@ -20,6 +20,23 @@ app.secret_key = secret
 key_merriam = None
 key_unsplash = None
 
+@app.before_first_request
+def create_lessons():
+    lessons = [
+        {
+            "title": "Lesson 1: Animals",
+            "content": "krjfwlr",
+            "flashcards": "flashcards/lesson_1.csv"  
+        },
+        {
+            "title": "Lesson 2: Food",
+            "content": "wlekjrbg",
+            "flashcards": "flashcards/lesson_2.csv"
+        }
+    ]
+    for lesson in lessons:
+        db.addLesson(lesson["title"], lesson["content"], lesson["flashcards"])
+    
 @app.route("/")
 def home():
     if session.get("username") != None:
@@ -153,8 +170,12 @@ def lesson(page_id):
     clicked_card = None
     if request.method == "POST":
         clicked_card = request.form.get("card_key")
-
-    return render_template('lesson.html', lessonFlashCards = flashCards(page_id), clicked_card=clicked_card)
+    lesson = db.getLesson(page_id+2)
+    print(lesson)
+    if not lesson:
+        error("Lesson not available")
+    flashcards = flashCards(page_id)
+    return render_template('lesson.html', lessonFlashCards = flashcards, clicked_card=clicked_card)
 
 @app.route("/error")
 def error(message):
