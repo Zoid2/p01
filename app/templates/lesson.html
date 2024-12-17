@@ -4,7 +4,7 @@
   SoftDev
   P01: Spanish Studying Service
   2024-12-17
-  Time Spent:
+  Time Spent: 0.5
 -->
 <html>
 
@@ -16,34 +16,22 @@
 </head>
 
 <body> 
-
-	<!-- Testing APIs -->
-	<p>Word: {{ prompt }}</p>
-	<p>How to say &#8220{{ prompt }}&#8221 in Spanish: {{ prompt_trans }}</p>
-	<p>A word you may use to describe &#8220{{ prompt }}&#8221: {{ related }}</p>
-	<p>How to say &#8220{{ related }}&#8221 in Spanish: {{ related_trans }}</p>
-	<img src={{ image }} alt="Photo from Unsplash" style="width:100%">
-	
 	{% for key, value in lessonFlashCards.items() %}
-		<div>
-			{% if clicked_card == key %}
-			<h1>{{ value }}</h1> 
-			{% else %}
-			<h1>{{ key }}</h1> 
-			<form method="POST">
-				<input type="hidden" name="card_key" value="{{ key }}">
-				<button type="submit">Flip Card</button>
-			</form>
-			{% endif %}
-		</div>
+		{% if loop.index != 1 %}
+			<div>
+				{% if clicked_card == key %}
+				<h1>{{ value }}</h1> 
+				{% else %}
+				<h1>{{ key }}</h1> 
+				<form method="POST">
+					<input type="hidden" name="card_key" value="{{ key }}">
+					<button type="submit">Flip Card</button>
+				</form>
+				{% endif %}
+			</div>
+		{% endif %}
 	{% endfor %}
 
 </body>
 
 </html>
-
-
-
-
-
-

@@ -67,8 +67,8 @@ def logout():
 def signup():
     return render_template("signup.html", projectName = "monoLingo")
 
-@app.route("/lesson/<int:page_id>")
-def lesson(page_id):
+@app.route("/search", methods=['GET', 'POST'])
+def search():
     try:
         with open("keys/key_merriam_webster.txt", "r") as file:
             key_merriam = file.read().strip()
@@ -79,7 +79,7 @@ def lesson(page_id):
             key_unsplash = file.read().strip()
     except:
         return error("Missing key for Unsplash API")
-    prompt = "car"
+    prompt = request.args.get("word", "alligator")
     prompt_trans = None
     related = None
     related_trans = None
@@ -120,14 +120,15 @@ def lesson(page_id):
             #return error("Issue with Merriam-Webster API")
     else:
         return error("File for Merriam-Webster key empty")
-    
-    # Flashcards
+    return render_template('search.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image)
 
+@app.route("/lesson/<int:page_id>", methods=['GET', 'POST'])
+def lesson(page_id):
     clicked_card = None
     if request.method == "POST":
         clicked_card = request.form.get("card_key")
 
-    return render_template('lesson.html', prompt = prompt, prompt_trans = prompt_trans, related = related, related_trans = related_trans, image = image, lessonFlashCards = flashCards(page_id), clicked_card=clicked_card)
+    return render_template('lesson.html', lessonFlashCards = flashCards(page_id), clicked_card=clicked_card)
 
 @app.route("/error")
 def error(message):
