@@ -168,15 +168,19 @@ def search():
 @app.route("/lesson/<int:page_id>", methods=['GET', 'POST'])
 def lesson(page_id):
     clicked_card = None
+    title = None
+    content = None
+    flashcards = None
     if request.method == "POST":
         clicked_card = request.form.get("card_key")
-    title = db.getLessonTitle(page_id+1)
-    content = db.getLessonContent(page_id+1)
-    flashcards = db.getLessonFlashcards(page_id+1)
-    flashcardArray = db.createDict(flashcards)
-    if not title:
-        error("Lesson not available")
-    return render_template('lesson.html', title = title, content = content, lessonFlashCards = flashcardArray, clicked_card=clicked_card)
+    try:
+        title = db.getLessonTitle(page_id+1)
+        content = db.getLessonContent(page_id+1)
+        flashcards = db.getLessonFlashcards(page_id+1)
+        flashcardArray = db.createDict(flashcards)
+        return render_template('lesson.html', title = title, content = content, lessonFlashCards = flashcardArray, clicked_card=clicked_card)
+    except:
+        return render_template('error.html', error="Lesson not available")
 
 @app.route("/error")
 def error(message):
