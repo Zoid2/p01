@@ -1,4 +1,62 @@
 <!DOCTYPE html>
+<!--
+  eColi: Ziyad H, Naf M, Chloe W, Jayden Z
+  SoftDev
+  P01: Spanish Studying Service
+  2024-12-17
+  Time Spent: 10 hours
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spanish Learning Service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+
+<body>
+    <h1>Spanish Learning Service</h1>
+    <p>Welcome, {{ name }}, to Spanish Studying Service! This is a website that aims to hone in your spanish skills as a new or returning learner. Learn from lessons, take randomized tests, and soar to new levels of learning a different language!</p>
+    <br><a href="{{ url_for('login') }}" class="btn btn-outline-info">Login</a>
+    <br><a href="{{ url_for('signup') }}">Register</a><br>
+    <form action="/logout" method="POST">
+        <input type="submit" name="Logout" value="Logout">
+    </form>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Spanish Test</h1>
+    
+        <div class="row">
+            {% for i, test in testNumber %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        Test #{{ test }} - Correct Answers: {{ correctAnswersAmount[i] }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Click to View Details</h5>
+                        <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#test{{ test }}">View Questions</button>
+    
+                        <div id="test{{ test }}" class="collapse mt-3">
+                            <ul class="list-group">
+                                {% for questionIndex, question in enumerate(questions[i]) %}
+                                <li class="list-group-item">
+                                    <p>Question {{ questionIndex + 1 }}:</p> {{ question }}<br>
+                                    <p>Your Answer:</p> {{ userAnswers[i][questionIndex] }}<br>
+                                    <p>Correct Answer:</p> {{ correctAnswers[i][questionIndex] }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,43 +84,4 @@
         </div>
     </nav>
 
-    <!-- Main Layout -->
-    <div class="container my-4">
-        <div class="row">
-            <!-- Site Description -->
-            <div class="col-md-6 site-description">
-                <div class="content-box">
-                    <h2>Site Description</h2>
-                    <p>This is where the description of the site will go. Provide a brief overview of the site's purpose and features.</p>
-                </div>
-            </div>
-            <!-- Image -->
-            <div class="col-md-6">
-                <div class="content-box img-box">
-                    <img src="https://via.placeholder.com/300x200" alt="Sample Image" class="img-fluid">
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <!-- Reviews -->
-            <div class="col-md-6 reviews">
-                <div class="content-box">
-                    <h2>Reviews</h2>
-                    <p>"This website is amazing!"</p>
-                    <p>"A great tool for learning!"</p>
-                </div>
-            </div>
-            <!-- Inspiring Text -->
-            <div class="col-md-6 inspiring-text">
-                <div class="content-box">
-                    <h2>Inspiring Text</h2>
-                    <p>"Empower yourself through learning. Achieve more with knowledge!"</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+  

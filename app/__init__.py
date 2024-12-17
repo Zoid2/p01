@@ -23,15 +23,17 @@ key_unsplash = None
 @app.route("/")
 def home():
     if session.get("username") != None:
-        userTables = db.displayAllTables()
+        allTables = db.displayAllTables()
+        userID = db.getId(session.get("username"))
+            
         testTables = []
         questions = [[]]
         userAnswers = [[]]
         correctAnswers = [[]]
         correctAnswersAmount = []
 
-        for table in userTables:
-            if table.startswith("test"):
+        for table in allTables:
+            if table.endswith(userID):
                 testTables.append(table[4:])
                 questions.append(db.getQuestions(table))
                 userAnswers.append(db.getAnswers(table))
@@ -160,6 +162,17 @@ def error(message):
 
 @app.route("/study/<int:page_id>", methods=["GET", "POST"])
 def study(page_id):
+    try:
+        with open("keys/key_merriam_webster.txt", "r") as file:
+            key_merriam = file.read().strip()
+    except:
+        return error("Missing key for Merriam-Webster API")
+    try:
+        with open("keys/key_unsplash.txt", "r") as file:
+            key_unsplash = file.read().strip()
+    except:
+        return error("Missing key for Unsplash API")
+
     defaultValue = 5
     questionsArr = []
     correctAnswers = []
@@ -186,7 +199,7 @@ def study(page_id):
                 unsplash = urllib.request.urlopen('https://api.unsplash.com/search/photos?page=1&query=' + wordBank[i] + '&client_id=' + key_unsplash)
                 unsplash_data = json.loads(unsplash.read())
                 image = unsplash_data['results'][0]['urls']['raw']
-                questionsArr.append("Identify the object: " + wordBank[i])
+                questionsArr.append("Identify the object in the picture:")
                 imagesArr.update({len(questionsArr):image})
                 correctAnswers.append(wordBank[i])
             else:
@@ -242,7 +255,7 @@ def submit_test():
         else:
             testID = int(key.split('_')[1])
     
-    testName = "test" + str(testID)
+    testName = "test" + str(testID) + "_" + str(db.getId(session.get("username")))
     
     db.testTable(testName)
     

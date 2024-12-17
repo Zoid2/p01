@@ -4,7 +4,7 @@
   SoftDev
   P01: Spanish Studying Service
   2024-12-17
-  Time Spent:
+  Time Spent: 10 hours
 -->
 <html>
     <head>
@@ -39,7 +39,7 @@
 				{% for question in questionsArr %}
 				<div class="mb-3">
 					<label for="answer_{{ loop.index }}" class="form-label">{{ loop.index }}. {{ question }}</label>
-					{% if imagesArr[loop.index - 1] %}
+					{% if imagesArr[loop.index] %}
 					<img src="{{ imagesArr[loop.index - 1] }}" alt="Image related to question" class="img-fluid mt-3">
 					{% endif %}
 					<input type="text" class="form-control" id="answer_{{ loop.index }}" name="answer_{{ loop.index }}" required>

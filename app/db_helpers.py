@@ -97,7 +97,7 @@ def addQuestion(table, question, userAnswer, correctAnswer):
 def getQuestions(table):
     numRows = cursor.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
     output = []
-    for i in numRows:
+    for i in range(1, numRows + 1):
         question = cursor.execute(f"SELECT question FROM '{table}' WHERE id=" + str(i)).fetchone()[0]
         output.append(question)
     return output
@@ -105,7 +105,7 @@ def getQuestions(table):
 def getAnswers(table):
     numRows = cursor.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
     output = []
-    for i in numRows:
+    for i in range(1, numRows + 1):
         userAnswer = cursor.execute(f"SELECT userAnswer FROM '{table}' WHERE id=" + str(i)).fetchone()[0]
         output.append(userAnswer)
     return output
@@ -113,7 +113,7 @@ def getAnswers(table):
 def getCorrectAnswers(table):
     numRows = cursor.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
     output = []
-    for i in numRows:
+    for i in range(1, numRows + 1):
         correctAnswer = cursor.execute(f"SELECT correctAnswer FROM '{table}' WHERE id=" + str(i)).fetchone()[0]
         output.append(correctAnswer)
     return output
