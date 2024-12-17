@@ -45,6 +45,9 @@ def validateUser(username, password):
 def getName(username):
     return cursor.execute(f"SELECT name FROM users WHERE username='{username}'").fetchone()[0]
 
+def getId(username):
+    return cursor.execute(f"SELECT id FROM users WHERE username='{username}'").fetchone()[0]
+
 def getHash(username):
     return cursor.execute(f"SELECT password FROM users WHERE username='{username}'").fetchone()[0]
 
