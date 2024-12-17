@@ -6,42 +6,31 @@
   2024-12-17
   Time Spent:
 -->
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login | Spanish Studying Service</title>
-        <!-- css styling 4 later <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"> -->
-    </head>
-    <body>
+<html>
 
-        <h1>Welcome back!</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Log In | Spanish Studying Service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/signup.css">
+</head>
 
-        <!-- Display flash messages consistently at the top of the form -->
-        <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <div class="flash-messages">
-              {% for category, message in messages %}
-                <div class="flash-message {{ category }}">{{ message }}</div>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endwith %} -->
+<body>
+    <header>
+        <div class="title">
+            <h1>{{ projectName }}</h1>
+        </div>
+    </header>
+    <h1>Log In</h1>
+    <div class="login">
+        <form action="/login" method="POST">
+            <input type="text" name="usernameL" placeholder="Username" required></br></br>
+            <input type="password" name="passwordL" placeholder="Password" required></br></br>
+            <input type="submit" class="btn btn-outline-info" value="Log In">
+        </form>
+    </div>
+    </br>
+</body>
 
-        <form method="POST" action="{{ url_for('home') }}">
-			<label for="username">Username</label>
-        </br>
-			<input type="text" id="username" name="username" placeholder="your unforgettable username" required>
-        </br>
-        </br>
-			<label for="password">Password</label>
-        </br>
-			<input type="password" id="password" name="password" placeholder="your password" required><br>
-        </br>
-			<button type="submit">Login</button>
-		</form>
-
-        <p>New? <a href="{{ url_for('register') }}">Create an account</a></p>
-
-    </body>
 </html>

@@ -1,62 +1,68 @@
 <!DOCTYPE html>
-<!--
-  eColi: Ziyad H, Naf M, Chloe W, Jayden Z
-  SoftDev
-  P01: Spanish Studying Service
-  2024-12-17
-  Time Spent:
--->
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up | Spanish Studying Service</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/signup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <div class="title">
-            <h1>{{ projectName }}</h1>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Name</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Lessons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Study</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                </ul>
+            </div>
         </div>
-    </header>
-    <h1>Dive Into a World Full of Learning (Sign Up)</h1>
-    <div class="signup">
-        <form action="/response" method="POST">
-            <label for="name">Name</label>
-            </br>
-            <input type="text" name="name" placeholder="your name, please" required>
-            </br>
-            </br>
-            <label for="username">Username</label>
-            </br>
-            <input type="text" name="username" placeholder="make the greatest username ever!" required>
-            </br>
-            </br>
-            <label for="password">Password</label></br>
-            <input type="password" name="password" placeholder="please follow the password guidelines..." required>
-            </br>
-            </br>
-            <input type="submit" class="btn btn-outline-info" value="Sign Up">
-        </form>
-    </div>
-    <h1>Log In</h1>
-    <div class="login">
-        <form action="/login" method="POST">
-            <input type="text" name="usernameL" placeholder="Username" required></br></br>
-            <!-- Plan to separate the login and signup pages -->
-            <input type="password" name="passwordL" placeholder="Password" required></br></br>
-            <input type="submit" class="btn btn-outline-info" value="Log In">
-        </form>
-    </div>
-    </br>
-    <div class="home">
-        <form action="/">
-            <button type="button" class="btn btn-outline-primary">Home</button>
-        </form>
-    </div>
-</body>
+    </nav>
 
+    <!-- Main Layout -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Site Description -->
+            <div class="col-md-6 site-description">
+                <div class="content-box">
+                    <h2>Site Description</h2>
+                    <p>This is where the description of the site will go. Provide a brief overview of the site's purpose and features.</p>
+                </div>
+            </div>
+            <!-- Image -->
+            <div class="col-md-6">
+                <div class="content-box img-box">
+                    <img src="https://via.placeholder.com/300x200" alt="Sample Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <!-- Reviews -->
+            <div class="col-md-6 reviews">
+                <div class="content-box">
+                    <h2>Reviews</h2>
+                    <p>"This website is amazing!"</p>
+                    <p>"A great tool for learning!"</p>
+                </div>
+            </div>
+            <!-- Inspiring Text -->
+            <div class="col-md-6 inspiring-text">
+                <div class="content-box">
+                    <h2>Inspiring Text</h2>
+                    <p>"Empower yourself through learning. Achieve more with knowledge!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
