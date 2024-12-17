@@ -100,6 +100,18 @@ def createDict(csv): # Takes csv file location, returns dictionary with first cs
         output[card[:card.index(",")]] = card[card.index(",") + 1:] # Splices each flashcard into a front and back, and creates a dictionary entry
     return output
 
+def getAllLessons():
+    things = cursor.execute("SELECT id, title, content FROM lessons")
+    lessons = []
+    for thing in things:
+        lesson = {
+            "id": thing[0],
+            "title": thing[1],
+            "content": thing[2]
+        }
+        lessons.append(lesson)
+    return lessons
+
 # End of Lesson Helpers
 
 # Test Helpers
@@ -137,11 +149,6 @@ def displayAllTables():
     tables = cursor.fetchall()
     tableNames = [table[0] for table in tables]  # Extract table names from result
     return tableNames
-
-def getAllLessons():
-    cursor.execute("SELECT id, title, content, flashcards FROM lessons;")
-    lessons = cursor.fetchall()
-    return lessons  # Returns a list of tuples
 
 
 # End of Helpers

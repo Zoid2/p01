@@ -181,7 +181,7 @@ def search():
 @app.route("/lesson/<int:page_id>", methods=['GET', 'POST'])
 def lesson(page_id=None):
     if page_id is None:
-        available_lessons = get_all_lessons()  
+        available_lessons = db.getAllLessons()  
         return render_template('all_lessons.html', lessons=available_lessons)
     else:
         clicked_card = None
@@ -191,9 +191,9 @@ def lesson(page_id=None):
     if request.method == "POST":
             clicked_card = request.form.get("card_key")
     try:
-        title = db.getLessonTitle(page_id+1)
-        content = db.getLessonContent(page_id+1)
-        flashcards = db.getLessonFlashcards(page_id+1)
+        title = db.getLessonTitle(page_id)
+        content = db.getLessonContent(page_id)
+        flashcards = db.getLessonFlashcards(page_id)
         flashcardArray = db.createDict(flashcards)
         return render_template('lesson.html', title = title, content = content, lessonFlashCards=flashcardArray, clicked_card=clicked_card)
     except:
