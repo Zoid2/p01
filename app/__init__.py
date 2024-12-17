@@ -44,13 +44,16 @@ def login():
     print(request.args)
     print(request.form)
     # The 'usernameL' and 'passwordL' will change when html is sorted
-    if request.method == "POST" and db.validateUser(request.form.get("usernameL"), request.form.get("passwordL")):
-        session["username"] = request.form.get("usernameL")
-        print(session["username"])
-        session["name"] = db.getName(session["username"])
-        session["password"] = request.form.get("passwordL")
-        print("Hello")
-        return redirect(url_for("home"))
+    try:
+        if request.method == "POST" and db.validateUser(request.form.get("usernameL"), request.form.get("passwordL")):
+            session["username"] = request.form.get("usernameL")
+            print(session["username"])
+            session["name"] = db.getName(session["username"])
+            session["password"] = request.form.get("passwordL")
+            print("Hello")
+            return redirect(url_for("home"))
+    except:
+        return render_template("error.html", error="Invalid Credentials")
     return render_template("signin.html")
 
 @app.route("/logout", methods=["POST"])
