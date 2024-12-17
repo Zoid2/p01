@@ -44,7 +44,5 @@ input, textarea {
 body {
   width: 100vw;
   height: 100vh;
-  background-image: url(signinbackground.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #252525
 }

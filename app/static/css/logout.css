@@ -33,7 +33,5 @@ a {
 body {
   width: 100vw;
   height: 100vh;
-  background-image: url(logoutbg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #252525
 }
