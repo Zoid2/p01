@@ -18,8 +18,12 @@ def lessonTable():
     db.commit()
 
 #Create Test Table
-def testTable():
+def testTable0():
     cursor.execute("CREATE TABLE tests(id INTEGER PRIMARY KEY, questions TEXT, correctAnswers INTEGER)") # questions should be csv file location
+    db.commit()
+
+def testTable(name):
+    cursor.execute(f"CREATE TABLE '{name}'(id INTEGER PRIMARY KEY, question TEXT, userAnswer TEXT, correctAnswer TEXT)")
     db.commit()
 
 # User Helpers
@@ -83,8 +87,34 @@ def createDict(csv): # Takes csv file location, returns dictionary with first cs
 
 # Test Helpers
 
-def createUserAnswerDict():
-    pass
+def addQuestion(table, question, userAnswer, correctAnswer):
+    cursor.execute(f"INSERT INTO '{table}'(question, userAnswer, correctAnswer) VALUES ('{question}', '{userAnswer}', '{correctAnswer}')")
+    db.commit()
+
+def getQuestions(table):
+    numRows = cursor.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
+    output = []
+    for i in numRows:
+        question = cursor.execute(f"SELECT question FROM '{table}' WHERE id=" + str(i)).fetchone()[0]
+        output.append(question)
+    return output
+
+def getAnswers(table):
+    numRows = cursor.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
+    output = []
+    for i in numRows:
+        userAnswer = cursor.execute(f"SELECT userAnswer FROM '{table}' WHERE id=" + str(i)).fetchone()[0]
+        output.append(userAnswer)
+    return output
+
+def getCorrectAnswers(table):
+    numRows = cursor.execute(f"SELECT COUNT(*) FROM '{table}'").fetchone()[0]
+    output = []
+    for i in numRows:
+        correctAnswer = cursor.execute(f"SELECT correctAnswer FROM '{table}' WHERE id=" + str(i)).fetchone()[0]
+        output.append(correctAnswer)
+    return output
+
 
 # End of Helpers
 
