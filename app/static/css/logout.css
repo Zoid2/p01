@@ -18,18 +18,22 @@ h1 {
   color: rgb(255, 255, 255);
 }
 
-label {
+p {
   text-align: center;
   margin-top: 75px;
-  font-family: poppins;
+  font-family: antipasto;
   font-size: 25px;
   color: rgb(255, 255, 255);
+}
+
+a {
+
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  background-image: url(studybg.png);
+  background-image: url(logoutbg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }

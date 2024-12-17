@@ -10,26 +10,31 @@
     src: url('antipasto.ttf');
 }
 
-h1 {
+label {
   text-align: center;
-  margin-top: 75px;
-  font-family: poppins;
-  font-size: 50px;
+  font-family: antipasto;
+  font-size: 25px;
   color: rgb(255, 255, 255);
 }
 
-label {
+h1 {
   text-align: center;
-  margin-top: 75px;
   font-family: poppins;
-  font-size: 25px;
-  color: rgb(255, 255, 255);
+  color: white;
+  margin-top: 20px;
+}
+
+.lesson {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-family: antipasto;
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  background-image: url(studybg.png);
+  background-image: url(lessonbg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
