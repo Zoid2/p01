@@ -119,8 +119,10 @@ def getCorrectAnswers(table):
     return output
 
 def displayAllTables():
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = cursor.fetchall()
-    tableNames = [table[0] for table in tables]
+    tableNames = [table[0] for table in tables]  # Extract table names from result
+    print(tableNames)
     return tableNames
 
 # End of Helpers

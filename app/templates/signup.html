@@ -15,61 +15,9 @@
 </head>
 
 <body>
-    <h1>Spanish Learning Service</h1>
-    <p>Welcome, {{ name }}, to Spanish Studying Service! This is a website that aims to hone in your spanish skills as a new or returning learner. Learn from lessons, take randomized tests, and soar to new levels of learning a different language!</p>
-    <br><a href="{{ url_for('login') }}" class="btn btn-outline-info">Login</a>
-    <br><a href="{{ url_for('signup') }}">Register</a><br>
-    <form action="/logout" method="POST">
-        <input type="submit" name="Logout" value="Logout">
-    </form>
-
-    <div class="container mt-5">
-        <h1 class="mb-4">Spanish Test</h1>
-    
-        <div class="row">
-            {% for i, test in testNumber %}
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        Test #{{ test }} - Correct Answers: {{ correctAnswersAmount[i] }}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Click to View Details</h5>
-                        <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#test{{ test }}">View Questions</button>
-    
-                        <div id="test{{ test }}" class="collapse mt-3">
-                            <ul class="list-group">
-                                {% for questionIndex, question in enumerate(questions[i]) %}
-                                <li class="list-group-item">
-                                    <p>Question {{ questionIndex + 1 }}:</p> {{ question }}<br>
-                                    <p>Your Answer:</p> {{ userAnswers[i][questionIndex] }}<br>
-                                    <p>Correct Answer:</p> {{ correctAnswers[i][questionIndex] }}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Layout</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Name</a>
+            <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -77,11 +25,47 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#">Lessons</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Study</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                    {% if session.get('name') %}
+                    <li class="nav-item">
+                        <form method="POST" action="{{ url_for('logout') }}">
+                            <button type="submit" class="btn btn-link nav-link">Log Out</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Sign Up</h2>
+        <form action="/signup" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <input type="submit" class="btn btn-outline-info btn-block" value="Sign Up">
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+
+
+</html>
 
   
