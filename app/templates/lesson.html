@@ -17,8 +17,11 @@
 </head>
 
 <body>
-	<h1>{title}</h1>
-	{content}
+	<h1>{{title}}</h1>
+	<h2>{{content}}</h2><br>
+	<p class="link" style="text-align: center;">
+    <a href="{{ url_for('home') }}" class="btn btn-outline-light btn-lg" role="button">Return Home</a>
+</p>
 	{% for key, value in lessonFlashCards.items() %}
 		{% if loop.index != 1 %}
 			<div class="lesson">
@@ -35,6 +38,7 @@
 			</div>
 		{% endif %}
 	{% endfor %}
+
 
 </body>
 

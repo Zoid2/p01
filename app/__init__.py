@@ -25,12 +25,12 @@ def create_lessons():
     lessons = [
         {
             "title": "Lesson 1: Animals",
-            "content": "krjfwlr",
+            "content": "Learn how to identify different animals in Spanish!",
             "flashcards": "flashcards/lesson_1.csv"  
         },
         {
             "title": "Lesson 2: Food",
-            "content": "wlekjrbg",
+            "content": "Learn how to order your favorite dishes in Spanish!",
             "flashcards": "flashcards/lesson_2.csv"
         }
     ]
@@ -170,12 +170,13 @@ def lesson(page_id):
     clicked_card = None
     if request.method == "POST":
         clicked_card = request.form.get("card_key")
-    lesson = db.getLesson(page_id+2)
-    print(lesson)
-    if not lesson:
+    title = db.getLessonTitle(page_id+1)
+    content = db.getLessonContent(page_id+1)
+    flashcards = db.getLessonFlashcards(page_id+1)
+    flashcardArray = db.createDict(flashcards)
+    if not title:
         error("Lesson not available")
-    flashcards = flashCards(page_id)
-    return render_template('lesson.html', lessonFlashCards = flashcards, clicked_card=clicked_card)
+    return render_template('lesson.html', title = title, content = content, lessonFlashCards = flashcardArray, clicked_card=clicked_card)
 
 @app.route("/error")
 def error(message):
@@ -284,6 +285,14 @@ def submit_test():
         db.addQuestion(testName, questions[i], answers[i], correctAnswers[i])
 
     return redirect(url_for("home"))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', error = "Page not found"), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error.html', error = "Internal server error"), 500
 
 if __name__ == "__main__":
     app.debug = True
