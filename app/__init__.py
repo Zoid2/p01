@@ -62,7 +62,7 @@ def logout():
 
 @app.route("/signup")
 def signup():
-    return render_template("signup.html", projectName = "Name PH")
+    return render_template("signup.html", projectName = "monoLingo")
 
 @app.route("/lesson/<int:page_id>")
 def lesson(page_id):
@@ -134,6 +134,7 @@ def error(message):
 def study(page_id):
     defaultValue = 5
     questionsArr = []
+    correctAnswers = []
     imagesArr = []
     wordBank = []
     wordBankDict = db.createDict("./flashcards/lesson_" + str(page_id) + ".csv")
@@ -157,10 +158,21 @@ def study(page_id):
                 unsplash_data = json.loads(unsplash.read())
                 image = unsplash_data['results'][0]['urls']['raw']
                 imagesArr.append(image)
+                correctAnswers.append(wordBank[i])
             else:
                 randomInt2 = random.randint(1,2)
                 if randomInt2 == 1:
                     questionsArr.append("Translate to Spanish: " + wordBank[i])
+                    try:
+                        merriam_prompt = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + wordBank[i] + '?key=' + key_merriam)
+                        merriam_prompt_data = json.loads(merriam_prompt.read())
+                        if ":" in merriam_prompt_data[0]['shortdef'][0]:
+                            prompt_trans = merriam_prompt_data[0]['shortdef'][0].split(":")[1]
+                        else:
+                            prompt_trans = merriam_prompt_data[0]['shortdef'][0]
+                    except:
+                        print("Issue with Merriam-Webster API")
+                    correctAnswers.append(prompt_trans)
                 else:
                     try:
                         merriam_prompt = urllib.request.urlopen('https://www.dictionaryapi.com/api/v3/references/spanish/json/' + wordBank[i] + '?key=' + key_merriam)
@@ -172,9 +184,10 @@ def study(page_id):
                     except:
                         print("Issue with Merriam-Webster API")
                     questionsArr.append("Translate to English: " + prompt_trans)
+                    correctAnswers.append(wordBank[i])
         except:
             print('error with unsplash api')
-    return render_template("study.html", questionsArr = questionsArr)
+    return render_template("study.html", questionsArr = questionsArr, correctAnswers = correctAnswers, testID = page_id)
 
 def flashCards(lessonNumber):
     flashCardArray = db.createDict("./flashcards/lesson_" + str(lessonNumber) + ".csv")
@@ -182,8 +195,30 @@ def flashCards(lessonNumber):
 
 @app.route("/submit_test", methods=["POST"])
 def submit_test():
-    answers = {key: value for key, value in request.form.items()}
-    # int correct answers, dict answers ^^, id test_id
+    answers = []
+    questions = []
+    correctAnswers = []
+    testID = []
+    
+    for key, value in request.form.items():
+        if key.startswith('answer_'):
+            question_index = key.split('_')[1]
+            answers[question_index] = value
+        elif key.startswith('question_'):
+            question_index = key.split('_')[1]
+            questions[question_index] = value
+        else:
+            question_index = key.split('_')[1]
+            testID.append(int(key.split('_')[2]))
+            correctAnswers[question_index] = value
+    
+    testName = "test" + testID[0]
+    
+    db.testTable(testName)
+    
+    for i in range(len(answers)):
+        db.addQuestion(testName, questions[i], answers[i], correctAnswers[i])
+
     return redirect(url_for("home"))
 
 if __name__ == "__main__":

@@ -42,7 +42,13 @@
 					<input type="text" class="form-control" id="answer_{{ loop.index }}" name="answer_{{ loop.index }}"
 						required>
 				</div>
+				<input type="hidden" name="question_{{ loop.index }}" value="{{ question }}">
 				{% endfor %}
+
+				{% for answer in correctAnswers %}
+				<input type="hidden" name="correct_{{ loop.index }}_{{ testID }}" value="{{ answer }}">
+				{% endfor %}
+
 				<button type="submit" class="btn btn-success">Submit Test</button>
 			</form>
 			{% endif %}
