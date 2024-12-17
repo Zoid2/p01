@@ -62,7 +62,7 @@ def logout():
 
 @app.route("/signup")
 def signup():
-    return render_template("signup.html", projectName = "Name PH")
+    return render_template("signup.html", projectName = "monoLingo")
 
 @app.route("/lesson/<int:page_id>")
 def lesson(page_id):
